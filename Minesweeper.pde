@@ -54,18 +54,51 @@ public void draw ()
 public boolean isWon()
 {
     //your code here
-    return false;
+    for(int i = 0; i<bombs.size(); i++)
+    {
+        if(bombs.get(i).clicked == true)
+        {
+            return false;
+        }
+    }
+    return true;
 }
 public void displayLosingMessage()
 {
     //your code here
-    fill(249,15,15);
-    textSize(32);
-    text("GAME OVER", 200,200 );
+    String over = "EW!!! YOU LOSE";
+    for(int cc = 2; cc<19; cc++)
+    {
+        buttons[2][cc].setLabel(over.substring(cc-2, cc-1));
+    }
+
+    for(int i = 0; i<bombs.size(); i++)
+    {
+        if(bombs.get(i).isClicked() == false)
+        {
+            bombs.get(i).clicked = true;
+        }
+    }
+
 }
 public void displayWinningMessage()
 {
     //your code here
+    String yay = "YOU WON!";
+    for(int ccc = 2; ccc<9; ccc++)
+    {
+        buttons[2][ccc].setLabel(yay.substring(ccc-2, ccc-1));
+    }
+        
+    for(int i = 0; i<bombs.size(); i++)
+    {
+        if(!bombs.contains(buttons) && bombs.get(i).clicked == false)
+        {
+            return true;
+        }
+    }
+    return false;
+
 }
 
 public class MSButton
@@ -101,28 +134,43 @@ public class MSButton
     {
         clicked = true;
         //your code here
-        if(keyPressed() == true && isMarked() == false)
+        if(keyPressed == true)
         {
-            cliked = false;
+            marked = !marked;
         }
-        else if(keyPressed() == true && bombs.contains(this))
+        else if(keyPressed == true && bombs.contains(this))
         {
             displayLosingMessage();
         }
         else if(countBombs(r,c) > 0)
         {
-            setLabel(countBombs(r,c));
+            setLabel("" + countBombs(r,c));
         }
         else
         {
-            buttons[row+1][col].mousePressed();
-            buttons[row+1][col-1].mousePressed();
-            buttons[row+1][col+1].mousePressed();
-            buttons[row][col-1].mousePressed();
-            buttons[row][col+1].mousePressed();
-            buttons[row-1][col].mousePressed();
-            buttons[row-1][col-1].mousePressed();
-            buttons[row-1][col+1].mousePressed();
+            if(isValid(r+1, c) == true && buttons[r+1][c].isClicked() == false)
+                buttons[r+1][c].mousePressed();
+            
+            if(isValid(r+1, c-1) == true && buttons[r+1][c-1].isClicked() == false)
+                buttons[r+1][c-1].mousePressed();
+            
+            if(isValid(r+1, c+1) == true && buttons[r+1][c+1].isClicked() == false)
+                buttons[r+1][c+1].mousePressed();
+            
+            if(isValid(r, c-1) == true && buttons[r][c-1].isClicked() == false)
+                buttons[r][c-1].mousePressed();
+            
+            if(isValid(r, c+1) == true && buttons[r][c+1].isClicked() == false)
+                buttons[r][c+1].mousePressed();
+            
+            if(isValid(r-1, c) == true && buttons[r+1][c].isClicked() == false)
+                buttons[r-1][c].mousePressed();
+            
+            if(isValid(r-1, c-1) == true && buttons[r-1][c-1].isClicked() == false)
+                buttons[r-1][c-1].mousePressed();
+            
+            if(isValid(r-1, c+1) == true && buttons[r-1][c+1].isClicked() == false)
+                buttons[r-1][c+1].mousePressed();
         }
     }
 
