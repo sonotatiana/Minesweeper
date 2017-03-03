@@ -56,7 +56,7 @@ public boolean isWon()
     //your code here
     for(int i = 0; i<bombs.size(); i++)
     {
-        if(bombs.get(i).clicked == true)
+        if(buttons[NUM_ROWS][NUM_COLS].clicked == true && bombs.get(i).clicked == false )
         {
             return false;
         }
@@ -66,19 +66,21 @@ public boolean isWon()
 public void displayLosingMessage()
 {
     //your code here
-    String over = "EW!!! YOU LOSE";
+    String over = "YOU LOSE!!";
     for(int cc = 2; cc<19; cc++)
     {
         buttons[2][cc].setLabel(over.substring(cc-2, cc-1));
     }
 
-    for(int i = 0; i<bombs.size(); i++)
+   /* for(int i = 0; i<bombs.size(); i++)
     {
         if(bombs.get(i).isClicked() == false)
         {
-            bombs.get(i).clicked = true;
+            bombs.get(0).clicked = true;
+            bombs.get(1).clicked = true;
         }
-    }
+
+    }*/
 
 }
 public void displayWinningMessage()
@@ -92,12 +94,15 @@ public void displayWinningMessage()
         
     for(int i = 0; i<bombs.size(); i++)
     {
-        if(!bombs.contains(buttons) && bombs.get(i).clicked == false)
+        for(int j =0; j<bombs.size(); j++)
         {
-            return true;
+            if(buttons[i][j].clicked == true && bombs.get(i).clicked == false)
+            {
+            
+            }
         }
     }
-    return false;
+    
 
 }
 
