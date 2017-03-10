@@ -29,6 +29,7 @@ void setup ()
     
     setBombs();
 }
+
 public void setBombs()
 {
     //your code
@@ -44,43 +45,33 @@ public void setBombs()
     }
     
 }
+ public void draw () 
+    {    
+        if(isWon() == true)
+        {
+            displayWinningMessage();
+        }
+       
+    }
 
-public void draw ()
-{
-    background( 0 );
-    if(isWon())
-        displayWinningMessage();
-}
+
 public boolean isWon()
 {
     //your code here
-    for(int i = 0; i<bombs.size(); i++)
-    {
-        if(buttons[NUM_ROWS][NUM_COLS].clicked == true && bombs.get(i).clicked == false )
-        {
-            return false;
-        }
-    }
-    return true;
+    for(int r = 0; r<NUM_ROWS; r++)
+        for(int c =0; c<NUM_COLS; c++)
+            if(buttons[r][c].isMarked() == false && buttons[r][c].isClicked() == false)
+                return true;
+    return  false;
 }
 public void displayLosingMessage()
 {
     //your code here
     String over = "YOU LOSE!!";
-    for(int cc = 2; cc<19; cc++)
+    for(int cc = 2; cc<11; cc++)
     {
         buttons[2][cc].setLabel(over.substring(cc-2, cc-1));
     }
-
-   /* for(int i = 0; i<bombs.size(); i++)
-    {
-        if(bombs.get(i).isClicked() == false)
-        {
-            bombs.get(0).clicked = true;
-            bombs.get(1).clicked = true;
-        }
-
-    }*/
 
 }
 public void displayWinningMessage()
@@ -91,19 +82,6 @@ public void displayWinningMessage()
     {
         buttons[2][ccc].setLabel(yay.substring(ccc-2, ccc-1));
     }
-        
-    for(int i = 0; i<bombs.size(); i++)
-    {
-        for(int j =0; j<bombs.size(); j++)
-        {
-            if(buttons[i][j].clicked == true && bombs.get(i).clicked == false)
-            {
-            
-            }
-        }
-    }
-    
-
 }
 
 public class MSButton
@@ -179,7 +157,7 @@ public class MSButton
         }
     }
 
-    public void draw () 
+ public void draw () 
     {    
         if (marked)
             fill(0);
@@ -193,7 +171,10 @@ public class MSButton
         rect(x, y, width, height);
         fill(0);
         text(label,x+width/2,y+height/2);
+
+        //background(0);
     }
+
     public void setLabel(String newLabel)
     {
         label = newLabel;
