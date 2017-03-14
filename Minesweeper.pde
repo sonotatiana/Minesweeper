@@ -26,7 +26,6 @@ void setup ()
             buttons[a][b] = new MSButton(a,b);
         }
     }
-    
     setBombs();
 }
 
@@ -51,7 +50,6 @@ public void setBombs()
             displayWinningMessage();
         }
     }
-
 
 public boolean isWon()
 {
@@ -222,7 +220,6 @@ public class MSButton
         {
             numBombs++; 
         }
-        
         return numBombs;
     }
 }
