@@ -39,7 +39,6 @@ public void setBombs()
          int col = (int)(Math.random()*20);
         if(!bombs.contains(buttons[row][col]))
         {
-            System.out.println(row + "," + col);
             bombs.add(buttons[row][col]);
         }
     }
@@ -51,7 +50,6 @@ public void setBombs()
         {
             displayWinningMessage();
         }
-       
     }
 
 
@@ -61,8 +59,9 @@ public boolean isWon()
     for(int r = 0; r<NUM_ROWS; r++)
         for(int c =0; c<NUM_COLS; c++)
             if(buttons[r][c].isMarked() == false && buttons[r][c].isClicked() == false)
-                return true;
-    return  false;
+                return false;
+
+    return true;
 }
 public void displayLosingMessage()
 {
@@ -121,7 +120,7 @@ public class MSButton
         {
             marked = !marked;
         }
-        else if(keyPressed == true && bombs.contains(this))
+        else if(bombs.contains(this))
         {
             displayLosingMessage();
         }
